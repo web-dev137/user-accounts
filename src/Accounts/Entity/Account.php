@@ -6,6 +6,7 @@ namespace App\Accounts\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
@@ -105,5 +106,27 @@ class Account
     public function getUserId():?int
     {
         return $this->userId;
+    }
+
+    public static function getContextSerialization(): array
+    {
+        return  [
+            AbstractNormalizer::CALLBACKS => [
+                'group' => 
+                function (
+                     object $attributeValue,
+                     object $object, 
+                     string $attributeName, 
+                     ?string $format = null, 
+                     array $context = []
+                    ) {
+                    return $attributeValue instanceof AccountGroup ? 
+                            [
+                                'idGroup'=>$attributeValue->getId(),
+                                'nameGroup'=>$attributeValue->getNameGroup()
+                            ]:'';
+                },
+            ],
+        ];
     }
 }
