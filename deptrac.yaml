@@ -1,0 +1,24 @@
+parameters:
+  paths:
+    - ./src
+  layers:
+    - name: Common
+      collectors: 
+      - type: directory
+        value: src/Common/.*
+
+    - name: Account
+      collectors:
+      - type: directory
+        value: src/Accounts/.*
+      
+    - name: Users
+      collectors:
+      - type: directory
+        value: src/Users/.*
+
+  ruleset:
+    Accounts:
+      - Common
+    Users:
+      - Common

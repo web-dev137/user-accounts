@@ -1,0 +1,19 @@
+accounts_controllers:
+    resource: 
+        path: ../src/Accounts/Controller
+        namespace: App\Accounts\Controller
+    type: attribute
+
+users_controllers:
+    resource:
+        path: ../src/Users/Controller
+        namespace: App\Users\Controller
+    type: attribute
+    
+api_refresh_token:
+    path: /api/auth/refresh-token
+    methods: POST
+
+api_login_check:
+    path: /api/auth/token
+    methods: POST
