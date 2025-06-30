@@ -6,7 +6,6 @@ namespace App\Accounts\Controller;
 use App\Accounts\DTO\AccountCreateRequest;
 use App\Accounts\DTO\AccountUpdateRequest;
 use App\Accounts\Entity\Account;
-use App\Accounts\Entity\AccountGroup;
 use App\Accounts\Service\AccountService;
 use App\Accounts\Service\CreaterAccountService;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -45,5 +44,19 @@ class AccountApiController extends AbstractController
         $context = Account::getContextSerialization();
         $result = $this->serializer->serialize($account,'json',$context);
          return JsonResponse::fromJsonString($result);
+    }
+
+      #[Route('/{id}',methods:['PUT'])]
+    public function update(int $id,#[MapRequestPayload] AccountUpdateRequest $data): JsonResponse
+    {
+        $account = $this->accountService->getAccount($id);
+        
+        if(!$this->isGranted('edit',$account)) {
+           throw $this->createAccessDeniedException('Вы не являетесь автором аккаунта');
+        } 
+        
+        $this->accountService->update($data,$account);
+        
+        return new JsonResponse(["success" => "Аккаунт был обновлён","id:"=>$account->getId()],200);
     }
 }
