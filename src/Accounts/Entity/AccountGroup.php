@@ -7,10 +7,11 @@ namespace App\Accounts\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Accounts\Security\EntitySecurityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccountGroupRepository::class)]
-class AccountGroup
+class AccountGroup implements EntitySecurityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

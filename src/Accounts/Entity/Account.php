@@ -7,10 +7,11 @@ namespace App\Accounts\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use App\Accounts\Security\EntitySecurityInterface;
 
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
-class Account
+class Account implements EntitySecurityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
