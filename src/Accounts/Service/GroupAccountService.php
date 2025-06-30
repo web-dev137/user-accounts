@@ -31,7 +31,7 @@ class GroupAccountService {
         return $this->accountGroupRepository->findOneBy(['id'=>$groupId]);
     }
 
-     public function update(
+    public function update(
         AccountGroupRequest $groupRequest,
         AccountGroup $group
     ){
@@ -39,5 +39,18 @@ class GroupAccountService {
             $group->setNameGroup(nameGroup: $groupRequest->nameGroup);
         }
         $this->accountGroupRepository->update($group);
+    }
+
+    public function delete(AccountGroup|null $group): int
+    {
+
+        if(!$group){
+            throw new EntityNotFoundException();
+        }
+
+        $id = $group->getId();
+        $this->accountGroupRepository->delete($group);
+
+        return $id;
     }
 }

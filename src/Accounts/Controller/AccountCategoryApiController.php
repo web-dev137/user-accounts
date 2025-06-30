@@ -70,4 +70,15 @@ class AccountCategoryApiController extends AbstractController
                 ],   
             200);
     }
+
+    #[Route('/{id}',methods:['DELETE'])]
+    public function delete(int $id) : JsonResponse 
+    {
+        $group = $this->groupAccountService->getGroup($id);
+        if($this->isGranted('delete',$group)===false) {
+           throw $this->createAccessDeniedException('Вы не являетесь автором группы');
+        }
+        $this->groupAccountService->delete($group);
+        return new JsonResponse(["success" => "Группа была удалёна","id"=>$id],200);
+    }
 }
