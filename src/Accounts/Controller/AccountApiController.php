@@ -43,10 +43,10 @@ class AccountApiController extends AbstractController
         $account = $this->createService->createAccount($data);
         $context = Account::getContextSerialization();
         $result = $this->serializer->serialize($account,'json',$context);
-         return JsonResponse::fromJsonString($result);
+        return JsonResponse::fromJsonString($result);
     }
 
-      #[Route('/{id}',methods:['PUT'])]
+    #[Route('/{id}',methods:['PUT'])]
     public function update(int $id,#[MapRequestPayload] AccountUpdateRequest $data): JsonResponse
     {
         $account = $this->accountService->getAccount($id);
@@ -58,5 +58,17 @@ class AccountApiController extends AbstractController
         $this->accountService->update($data,$account);
         
         return new JsonResponse(["success" => "Аккаунт был обновлён","id:"=>$account->getId()],200);
+    }
+
+    #[Route('/{id}',methods:['DELETE'])]
+    public function delete(int $id)
+    {
+        $account = $this->accountService->getAccount($id);
+        if(!$this->isGranted('delete',$account)) {
+           throw $this->createAccessDeniedException('Вы не являетесь автором аккаунта');
+        }
+
+        $this->accountService->delete($account);
+        return new JsonResponse(["success" => "Аккаунт был удалён","id"=>$id],200);
     }
 }

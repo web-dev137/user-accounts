@@ -58,4 +58,9 @@ class AccountService
         $this->accountRepository->update(account: $account);
         
     }
+
+    public function delete(Account $account)
+    {
+        $this->accountRepository->delete($account);
+    }
 }

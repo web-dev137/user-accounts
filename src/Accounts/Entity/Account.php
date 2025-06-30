@@ -115,7 +115,7 @@ class Account implements EntitySecurityInterface
             AbstractNormalizer::CALLBACKS => [
                 'group' => 
                 function (
-                     object $attributeValue,
+                     ?object $attributeValue,
                      object $object, 
                      string $attributeName, 
                      ?string $format = null, 
