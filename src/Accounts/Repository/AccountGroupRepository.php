@@ -20,4 +20,10 @@ class AccountGroupRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($accountGroup);
         $this->getEntityManager()->flush();
     }
+
+    public function update(AccountGroup $group)
+    {
+        $this->getEntityManager()->persist($group);
+        $this->getEntityManager()->flush();
+    }
 }

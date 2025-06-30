@@ -8,6 +8,7 @@ namespace App\Accounts\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Accounts\Security\EntitySecurityInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccountGroupRepository::class)]
@@ -64,4 +65,21 @@ class AccountGroup implements EntitySecurityInterface
         return $this->accounts;
     }
 
+    public static function getContextSerialization(): array
+    {
+        return  [
+            AbstractNormalizer::CALLBACKS => [
+                'group' => 
+                function (
+                     ?object $attributeValue,
+                     object $object, 
+                     string $attributeName, 
+                     ?string $format = null, 
+                     array $context = []
+                    ) {
+                    return $attributeValue instanceof Account ?:'';
+                },
+            ],
+        ];
+    }
 }

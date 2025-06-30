@@ -30,4 +30,14 @@ class GroupAccountService {
     {
         return $this->accountGroupRepository->findOneBy(['id'=>$groupId]);
     }
+
+     public function update(
+        AccountGroupRequest $groupRequest,
+        AccountGroup $group
+    ){
+        if(!is_null($groupRequest->nameGroup)) {
+            $group->setNameGroup(nameGroup: $groupRequest->nameGroup);
+        }
+        $this->accountGroupRepository->update($group);
+    }
 }
