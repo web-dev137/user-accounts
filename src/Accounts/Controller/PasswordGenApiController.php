@@ -26,10 +26,10 @@ class PasswordGenApiController extends AbstractController
     ){
         
     }
-    #[Route('/generate/{id}',methods: ['GET'])]
-    public function getAccounts(int $id):Response
+    #[Route('/generate/{length}',methods: ['GET'])]
+    public function getAccounts(int $length):Response
     {
-        $password = $this->genPasswordService->genPassword($id);
+        $password = $this->genPasswordService->genPassword(length: $length);
         return new JsonResponse([
             'Ваш сгенерированный пароль' => $password
         ]);
