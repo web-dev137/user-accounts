@@ -176,6 +176,15 @@ security:
         - { path: ^/api/user/sign-up, roles: PUBLIC_ACCESS}
         - { path: ^/api/account/(.*), roles: IS_AUTHENTICATED_FULLY}
 ```
+
+### Refresh token config
+```yaml
+gesdinet_jwt_refresh_token:
+    refresh_token_class: App\Users\Entity\RefreshToken
+    ttl: 2592000
+    token_parameter_name: refreshToken
+```
+
 ### Example quries: 
 Signup user.
 POST
