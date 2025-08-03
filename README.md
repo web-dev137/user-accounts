@@ -1,11 +1,11 @@
-This example module-monolith architecture.
-The API of the user account storage service. The services includes the following functional:
+This example module-monolith architecture.<br>
+The API of the user account storage service. The services includes the following functional:<br>
 
-1)Allow to user storage accounts.
-2)Create categories for accounts.
-3)Other functional for manipulate with their data.
-4)Generate password for account.
-All end-points except number 4 are close, for this task i use JWT authorization.
+1)Allow to user storage accounts.<br>
+2)Create categories for accounts.<br>
+3)Other functional for manipulate with their data.<br>
+4)Generate password for account.<br>
+All end-points except number 4 are close, for this task i use JWT authorization.<br>
 
 ### Structure:
 ```scala
